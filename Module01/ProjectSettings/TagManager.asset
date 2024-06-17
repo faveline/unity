@@ -7,6 +7,11 @@ TagManager:
   - player1
   - player2
   - player3
+  - ground
+  - surface
+  - ending1
+  - ending2
+  - ending3
   layers:
   - Default
   - TransparentFX
