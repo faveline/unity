@@ -13,12 +13,15 @@ public class move : MonoBehaviour
 	private bool		isSurface;
 	public GameObject	endObject;
 	public string		ending;
+	public string		ignore_col;
+	private int			tp;
 
     void Start()
     {
 		endObject = GameObject.Find(ending);
 		endObject.SetActive(false);
 		rb = GetComponent<Rigidbody2D>();
+		tp = 0;
     }
 
     // Update is called once per frame
@@ -37,6 +40,8 @@ public class move : MonoBehaviour
 			isGrounded = false;
 			isSurface = false;
 		}
+		if (tp != 0)
+			tp--;
     }
 
 	void OnCollisionEnter2D(Collision2D other){
@@ -46,22 +51,56 @@ public class move : MonoBehaviour
  	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		if(other.gameObject.CompareTag("surface")){
+		if (other.gameObject.CompareTag("surface")){
 			isSurface = true;
 		}
-		if(other.gameObject.CompareTag(ending)){
+		if (other.gameObject.CompareTag(ending)){
 			pov_player.end += 1;
 			endObject.SetActive(true);
 		}
+		if (other.gameObject.layer == 13 && tp == 0) {
+			tp = 30;
+			tp_ini tmp = other.gameObject.GetComponent<tp_ini>();
+			transform.position = tmp.dest;
+		}
+		if (other.gameObject.CompareTag("platform")) {
+			isSurface = true;
+			transform.parent = other.transform;
+		}
+		if (other.gameObject.layer == 14) {
+			doors tmp = other.gameObject.GetComponent<doors>();
+			// if (tmp.charac == 0)
+			// 	tm
+			tmp.open++;
+			tmp.door.transform.position += Vector3.forward;
+			if (tmp.open == 3)
+				tmp.destroy_door();
+			if (tmp.open == 5)
+				other.gameObject.SetActive(false);
+		}
  	}
 
+	void OnTriggerStay2D(Collider2D other) {
+		if (other.gameObject.CompareTag("surface")) {
+			isSurface = true;
+		}
+		if (other.gameObject.CompareTag("platform")) {
+			isSurface = true;
+			transform.parent = other.transform;
+		}
+	}
+
 	void OnTriggerExit2D(Collider2D other){
-		if(other.gameObject.CompareTag("surface") && id_player == pov_player.pov){
+		if(other.gameObject.CompareTag("surface")){
 			isSurface = false;
 		}
 		if(other.gameObject.CompareTag(ending)){
 			pov_player.end -= 1;
 			endObject.SetActive(false);
+		}
+		if(other.gameObject.CompareTag("platform")){
+			isSurface = false;
+			transform.parent = null;	
 		}
  	}
 }

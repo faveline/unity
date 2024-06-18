@@ -12,6 +12,15 @@ TagManager:
   - ending1
   - ending2
   - ending3
+  - yellow
+  - red
+  - blue
+  - tp1
+  - tp2
+  - tp3
+  - tp4
+  - platform
+  - white
   layers:
   - Default
   - TransparentFX
@@ -19,16 +28,16 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - obstacle
+  - player1
+  - player2
+  - player3
+  - obstacle1
+  - obstacle2
+  - obstacle3
+  - teleporteur
+  - switch
+  - door
   - 
   - 
   - 
