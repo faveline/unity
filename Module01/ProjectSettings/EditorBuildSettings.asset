@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Module01/Stage3.unity
     guid: c544c86e1e7d1f3929c9083b1fdb8f5a
+  - enabled: 1
+    path: Assets/Module01/Stage4.unity
+    guid: 006a5a7cf43890489a36c8c694419b22
+  - enabled: 1
+    path: Assets/Module01/Stage5.unity
+    guid: 510cd9b355f27271a898255479f40faa
   m_configObjects: {}

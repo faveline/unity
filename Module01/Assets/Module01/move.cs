@@ -51,6 +51,11 @@ public class move : MonoBehaviour
  	}
 
 	void OnTriggerEnter2D(Collider2D other){
+		if (other.gameObject.layer == 16 && (other.gameObject.CompareTag("white") || other.gameObject.tag == gameObject.tag)) {
+			if (pov_player.pov != 4)
+				Debug.Log("Game over !");
+			pov_player.pov = 4;	
+		}
 		if (other.gameObject.CompareTag("surface")){
 			isSurface = true;
 		}
@@ -69,14 +74,20 @@ public class move : MonoBehaviour
 		}
 		if (other.gameObject.layer == 14) {
 			doors tmp = other.gameObject.GetComponent<doors>();
-			// if (tmp.charac == 0)
-			// 	tm
-			tmp.open++;
-			tmp.door.transform.position += Vector3.forward;
-			if (tmp.open == 3)
-				tmp.destroy_door();
-			if (tmp.open == 5)
-				other.gameObject.SetActive(false);
+			if (other.gameObject.CompareTag("white")) {
+				other.GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().material;
+				other.gameObject.tag = gameObject.tag;
+			}
+			if (tmp.door.CompareTag("platform")) {
+				tmp.change_plat(id_player);
+			} else if (other.gameObject.tag == gameObject.tag && other.gameObject.tag == tmp.door.gameObject.tag) {
+				tmp.open++;
+				tmp.door.transform.position += Vector3.forward;
+				if (tmp.open == 3)
+					tmp.destroy_door();
+				if (tmp.open == 5)
+					other.gameObject.SetActive(false);
+			}
 		}
  	}
 

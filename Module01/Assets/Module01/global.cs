@@ -9,19 +9,20 @@ public class global : MonoBehaviour
 	public int	end;
 	Scene		scene;
 	public int	nbr_scene;
+	public int	wait_death;
 
 	void Start() {
 		scene = SceneManager.GetActiveScene();
 	}
 
     void Update() {
-		if (Input.GetKeyDown(KeyCode.Alpha1)) {
+		if (Input.GetKeyDown(KeyCode.Alpha1) && pov != 4) {
 			pov = 1;
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha2)) {
+		if (Input.GetKeyDown(KeyCode.Alpha2) && pov != 4) {
 			pov = 2;
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha3)) {
+		if (Input.GetKeyDown(KeyCode.Alpha3) && pov != 4) {
 			pov = 3;
 		}
 		if (Input.GetKeyDown(KeyCode.R))
@@ -32,6 +33,11 @@ public class global : MonoBehaviour
 				SceneManager.LoadScene(0);
 			else
 				SceneManager.LoadScene(scene.buildIndex + 1);
+		}
+		if (pov == 4) {
+			wait_death--;
+			if (wait_death == 0)
+				SceneManager.LoadScene(scene.buildIndex);	
 		}
     }
 }

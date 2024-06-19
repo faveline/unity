@@ -2771,7 +2771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pov: 0
   end: 0
-  nbr_scene: 3
+  nbr_scene: 5
 --- !u!1 &712991589
 GameObject:
   m_ObjectHideFlags: 0
