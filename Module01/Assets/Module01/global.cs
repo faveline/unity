@@ -39,5 +39,8 @@ public class global : MonoBehaviour
 			if (wait_death == 0)
 				SceneManager.LoadScene(scene.buildIndex);	
 		}
+		if (Input.GetKey("escape")) {
+            Application.Quit();
+        }
     }
 }
